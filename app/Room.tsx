@@ -36,6 +36,6 @@ const Room = ({ children }: { children: React.ReactNode }) => {
       </ClientSideSuspense>
     </RoomProvider>
   );
-}
+};
 
 export default Room;
