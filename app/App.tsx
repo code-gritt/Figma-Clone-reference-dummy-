@@ -18,8 +18,8 @@ import {
   initializeFabric,
   renderCanvas,
 } from "@/lib/canvas";
-import { handleDelete, handleKeyDown } from "@/lib/key-events";
-import { LeftSidebar, Live, Navbar, RightSidebar } from "@/components/index";
+// import { handleDelete, handleKeyDown } from "@/lib/key-events";
+// import { LeftSidebar, Live, Navbar, RightSidebar } from "@/components/index";
 import { handleImageUpload } from "@/lib/shapes";
 import { defaultNavElement } from "@/constants";
 import { ActiveElement, Attributes } from "@/types/type";
@@ -177,9 +177,9 @@ const Home = () => {
     if (!canvasObjects || canvasObjects.size === 0) return true;
 
     // delete all the shapes from the store
-    for (const [key, value] of canvasObjects.entries()) {
-      canvasObjects.delete(key);
-    }
+    // for (const [key, value] of canvasObjects.entries()) {
+    //   canvasObjects.delete(key);
+    // }
 
     // return true if the store is empty
     return canvasObjects.size === 0;
@@ -237,7 +237,7 @@ const Home = () => {
       // delete the selected shape from the canvas
       case "delete":
         // delete it from the canvas
-        handleDelete(fabricRef.current as any, deleteShapeFromStorage);
+        // handleDelete(fabricRef.current as any, deleteShapeFromStorage);
         // set "select" as the active element
         setActiveElement(defaultNavElement);
         break;
@@ -437,16 +437,16 @@ const Home = () => {
      *
      * We're using this to perform some actions like delete, copy, paste, etc when the user presses the respective keys on the keyboard.
      */
-    window.addEventListener("keydown", (e) =>
-      handleKeyDown({
-        e,
-        canvas: fabricRef.current,
-        undo,
-        redo,
-        syncShapeInStorage,
-        deleteShapeFromStorage,
-      })
-    );
+    // window.addEventListener("keydown", (e) =>
+    //   handleKeyDown({
+    //     e,
+    //     canvas: fabricRef.current,
+    //     undo,
+    //     redo,
+    //     syncShapeInStorage,
+    //     deleteShapeFromStorage,
+    //   })
+    // );
 
     // dispose the canvas and remove the event listeners when the component unmounts
     return () => {
@@ -466,16 +466,16 @@ const Home = () => {
         });
       });
 
-      window.removeEventListener("keydown", (e) =>
-        handleKeyDown({
-          e,
-          canvas: fabricRef.current,
-          undo,
-          redo,
-          syncShapeInStorage,
-          deleteShapeFromStorage,
-        })
-      );
+      // window.removeEventListener("keydown", (e) =>
+      //   handleKeyDown({
+      //     e,
+      //     canvas: fabricRef.current,
+      //     undo,
+      //     redo,
+      //     syncShapeInStorage,
+      //     deleteShapeFromStorage,
+      //   })
+      // );
     };
   }, [canvasRef]); // run this effect only once when the component mounts and the canvasRef changes
 
@@ -489,26 +489,9 @@ const Home = () => {
   }, [canvasObjects]);
 
   return (
-    <main className='h-screen overflow-hidden'>
-      <Navbar
-        imageInputRef={imageInputRef}
-        activeElement={activeElement}
-        handleImageUpload={(e: any) => {
-          // prevent the default behavior of the input element
-          e.stopPropagation();
-
-          handleImageUpload({
-            file: e.target.files[0],
-            canvas: fabricRef as any,
-            shapeRef,
-            syncShapeInStorage,
-          });
-        }}
-        handleActiveElement={handleActiveElement}
-      />
-
-      <section className='flex h-full flex-row'>
-        <LeftSidebar allShapes={Array.from(canvasObjects)} />
+    <main className="h-screen overflow-hidden">
+      <section className="flex h-full flex-row">
+        {/* <LeftSidebar allShapes={Array.from(canvasObjects)} />
 
         <Live canvasRef={canvasRef} undo={undo} redo={redo} />
 
@@ -519,7 +502,7 @@ const Home = () => {
           isEditingRef={isEditingRef}
           activeObjectRef={activeObjectRef}
           syncShapeInStorage={syncShapeInStorage}
-        />
+        /> */}
       </section>
     </main>
   );
